@@ -26,10 +26,8 @@ public class Player : NetworkBehaviour
             {
                 renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
             }
-        }
-
-        if (HasStateAuthority)
             CameraFollow.Singleton.SetTarget(camTarget);
+        }     
     }
 
     public override void FixedUpdateNetwork() //Execute any logic that affects gameplay, such as player movement and interactions
