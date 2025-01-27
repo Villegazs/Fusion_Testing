@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad25162401941342a88e72432d7aae1, type: 3}
   m_Name: MenuConfig
   m_EditorClassIdentifier: 
-  _maxPlayers: 12
+  _maxPlayers: 4
   _adaptFramerateForMobilePlatform: 1
   _availableAppVersions: []
   _availableRegions:
