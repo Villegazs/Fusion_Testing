@@ -1,16 +1,22 @@
 using Fusion;
+using Fusion.Addons.KCC;
 using Fusion.Menu;
 using Fusion.Sockets;
 using MultiClimb.Menu;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCallbacks
 {
+    public Player LocalPlayer;
+    public Vector2 AccumulatedMouseDelta => mouseDeltaAccumulator.AccumulatedValue;
+
     private NetInput accumulatedInput;
+    private Vector2Accumulator mouseDeltaAccumulator = new() { SmoothingWindow = 0.025f };
     private bool resetInput;
     public void BeforeUpdate()
     {
@@ -45,11 +51,15 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
         {
             Vector2 mouseDelta = mouse.delta.ReadValue();
             Vector2 lookRotationDelta = new(-mouseDelta.y, mouseDelta.x);
-            accumulatedInput.LookDelta += lookRotationDelta;
+            //accumulatedInput.LookDelta += lookRotationDelta;
+            mouseDeltaAccumulator.Accumulate(lookRotationDelta);
         }
 
         if (keyboard != null)
         {
+            if (keyboard.rKey.wasPressedThisFrame && LocalPlayer != null)
+                LocalPlayer.RPC_SetReady();
+
             Vector2 moveDirection = Vector2.zero;
 
             if (keyboard.wKey.isPressed)
@@ -103,11 +113,12 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         accumulatedInput.Direction.Normalize();
+        accumulatedInput.LookDelta = mouseDeltaAccumulator.ConsumeTickAligned(runner);
         input.Set(accumulatedInput);
         resetInput = true;
 
         //We have to reset the look delta inmediately because we dont want mouse input being reused if another tick is executed during this same frame
-        accumulatedInput.LookDelta = default;
+        //accumulatedInput.LookDelta = default;
         
     }
 
