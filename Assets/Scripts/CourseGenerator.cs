@@ -108,14 +108,14 @@ public class CourseGenerator : MonoBehaviour
         {
             Transform instantiated = (Transform)PrefabUtility.InstantiatePrefab(jumpPadPrefab, jumpPadParent);
             instantiated.SetPositionAndRotation(GetRandPos(), GetRandRot(-90f, padMaxAngle));
-            //instantiated.GetComponent<ImpulseProcessor>().ImpulseStrength = Random.Range(jumpPadImpulseRange.x, jumpPadImpulseRange.y);
+            instantiated.GetComponent<ImpulseProcessor>().ImpulseStrength = Random.Range(jumpPadImpulseRange.x, jumpPadImpulseRange.y);
             jumpPads.Add(instantiated);
         }
         else
         {
             Transform instantiated = (Transform)PrefabUtility.InstantiatePrefab(jumpBallPrefab, jumpPadParent);
             instantiated.SetPositionAndRotation(GetRandPos(), Quaternion.identity);
-            //instantiated.GetComponent<ImpulseProcessor>().ImpulseStrength = Random.Range(jumpBallImpulseRange.x, jumpBallImpulseRange.y);
+            instantiated.GetComponent<ImpulseProcessor>().ImpulseStrength = Random.Range(jumpBallImpulseRange.x, jumpBallImpulseRange.y);
             jumpPads.Add(instantiated);
         }
 

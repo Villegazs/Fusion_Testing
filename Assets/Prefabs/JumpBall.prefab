@@ -93,6 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7287236341947917369}
   - component: {fileID: 2633203297735258125}
+  - component: {fileID: 7287984922557811901}
+  - component: {fileID: -3521059393957999617}
   m_Layer: 0
   m_Name: JumpBall
   m_TagString: Untagged
@@ -137,3 +139,34 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.375
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7287984922557811901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608596765230863402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2751240818
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours: []
+--- !u!114 &-3521059393957999617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608596765230863402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33235cdcdfa4aca47a113e26895c0d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpulseStrength: 24
+  isSphere: 1

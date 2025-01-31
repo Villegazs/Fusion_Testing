@@ -53,6 +53,7 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
             Vector2 lookRotationDelta = new(-mouseDelta.y, mouseDelta.x);
             //accumulatedInput.LookDelta += lookRotationDelta;
             mouseDeltaAccumulator.Accumulate(lookRotationDelta);
+            buttons.Set(InputButton.Grapple, mouse.rightButton.isPressed);
         }
 
         if (keyboard != null)
@@ -74,6 +75,7 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
             accumulatedInput.Direction += moveDirection;
 
             buttons.Set(InputButton.Jump, keyboard.spaceKey.isPressed);
+            buttons.Set(InputButton.Glide, keyboard.leftShiftKey.isPressed);
 
             accumulatedInput.Buttons = new NetworkButtons(accumulatedInput.Buttons.Bits | buttons.Bits); //Combine the 2 networkButtons bits
         }

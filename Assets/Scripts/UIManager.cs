@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,14 +30,33 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI gameStateText;
     [SerializeField] private TextMeshProUGUI instructionText;
-    [SerializeField] private LeaderboardItems[] leaderboardItems; 
+    [SerializeField] private Slider grappleCD;
+    [SerializeField] private Slider glideCD;
+    [SerializeField] private Image glideActive;
+    [SerializeField] private Slider doubleJumpCD;
+    [SerializeField] private LeaderboardItems[] leaderboardItems;
 
-
+    public Player LocalPlayer;
     private void Awake()
     {
         Singleton = this;
+
+        grappleCD.value = 0f;
+        glideCD.value = 0f;
+        doubleJumpCD.value = 0f;
     }
 
+    private void Update()
+    {
+        if (LocalPlayer == null)
+            return;
+
+        grappleCD.value = LocalPlayer.GrappleCDFactor;
+        doubleJumpCD.value = LocalPlayer.DoubleJumpCDFactor;
+
+        glideActive.enabled = LocalPlayer.IsGliding;
+        glideCD.value = LocalPlayer.IsGliding ? LocalPlayer.GlideCharge : LocalPlayer.GlideCDFactor; // Display cooldown and how much longer the player can keep gliding
+    }
     private void OnDestroy()
     {
         if (Singleton == this)

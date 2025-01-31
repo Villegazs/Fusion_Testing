@@ -261,6 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2193691494254184827}
+  - component: {fileID: 5237261841037669885}
   m_Layer: 0
   m_Name: CamTarget
   m_TagString: Untagged
@@ -283,6 +284,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2225587582110800740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5237261841037669885
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084011391844416820}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c321f47c13402d3409a1496afe0ef987, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.35
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 25
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.083333336
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2173356211895935037
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +793,7 @@ GameObject:
   - component: {fileID: -6127824763382320275}
   - component: {fileID: 1030629176985831949}
   - component: {fileID: -418267345237607541}
-  - component: {fileID: -4577372488509909410}
+  - component: {fileID: 869716368667938217}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -738,7 +835,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: -418267345237607541}
-  - {fileID: -4577372488509909410}
+  - {fileID: 869716368667938217}
 --- !u!54 &1030629176985831949
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -786,12 +883,26 @@ MonoBehaviour:
   - {fileID: 3208298448284846645}
   - {fileID: 5271234934346940701}
   - {fileID: 8799478614307836382}
-  kcc: {fileID: -4577372488509909410}
+  kcc: {fileID: 869716368667938217}
+  glideProccesor: {fileID: 4950285184810116406, guid: 770a4d8dcf68c594986e8e56d7c31bb4,
+    type: 3}
   camTarget: {fileID: 2193691494254184827}
+  source: {fileID: 5237261841037669885}
+  maxPitch: 85
   lookSensitivity: 0.15
-  speed: 5
-  jumpImpulse: 10
---- !u!114 &-4577372488509909410
+  jumpImpulse: {x: 0, y: 6, z: 0}
+  doubleJumpMultiplier: 0.75
+  grappleCD: 2
+  glideCD: 2
+  doubleJumpCD: 5
+  grappleStrength: 12
+  maxGlideTime: 2
+  <AbilityRange>k__BackingField: 25
+  IsReady: 0
+  _Name: 
+  _GlideCharge: 0
+  _IsGliding: 0
+--- !u!114 &869716368667938217
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -800,7 +911,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9040168462585498880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1869825851, guid: 977dbcf975465374990f471e1497f563, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f7684f04e649e84fb2ee1bc9fbee42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _settings:
@@ -813,19 +924,25 @@ MonoBehaviour:
     CollisionLayerMask:
       serializedVersion: 2
       m_Bits: 65
+    Features: -1
+    InputAuthorityBehavior: 0
+    StateAuthorityBehavior: 0
     ProxyInterpolationMode: 0
+    AllowClientTeleports: 0
+    Processors:
+    - {fileID: 4950285184810116406, guid: 4c003648e8f15e6448b4b9ca4a06d0d4, type: 3}
+    - {fileID: 561824206424634091, guid: 68c4081a63f1dfd469da9c95bea22158, type: 3}
+    - {fileID: 8306782452827789390, guid: 6d976f9777012db4aa55e7e6b1991afe, type: 3}
     TeleportThreshold: 1
+    MaxPenetrationSteps: 8
+    CCDRadiusMultiplier: 0.75
     AntiJitterDistance: {x: 0.025, y: 0.01}
+    PredictionCorrectionSpeed: 30
+    NetworkedInteractions: 8
     CompressNetworkPosition: 0
+    ForceSingleOverlapQuery: 0
     ForcePredictedLookRotation: 0
-    StepHeight: 0.5
-    StepDepth: 0.2
-    StepSpeed: 1
-    StepMinPushBack: 0.5
-    StepGroundCheckRadiusScale: 0.5
-    StepRequireGroundTarget: 0
-    SnapDistance: 0.25
-    SnapSpeed: 4
+    SuppressConvexMeshColliders: 0
 --- !u!1001 &4218172695574425155
 PrefabInstance:
   m_ObjectHideFlags: 0

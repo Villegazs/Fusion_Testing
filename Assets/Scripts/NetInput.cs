@@ -6,6 +6,8 @@ using UnityEngine;
 public enum InputButton
 {
     Jump,
+    Grapple,
+    Glide,
 }
 
 public struct NetInput : INetworkInput  // Will allow us to feed this struct to fusion so it can be replicated properly to the server
