@@ -3,11 +3,11 @@ namespace Fusion {
 
 
   /// <summary>
-  /// Companion component for <see cref="FusionStats"/>, which automatically faces this GameObject toward the supplied Camera. If Camera == null, will face towards Camera.main.
+  /// Component which automatically faces this GameObject toward the supplied Camera. If Camera == null, will face towards Camera.main.
   /// </summary>
   [Fusion.ScriptHelp(BackColor = ScriptHeaderBackColor.Olive)]
   [ExecuteAlways]
-  public class FusionStatsBillboard : Fusion.Behaviour {
+  public class FusionBasicBillboard : Fusion.Behaviour {
 
     /// <summary>
     /// Force a particular camera to billboard this object toward. Leave null to use Camera.main.
@@ -18,12 +18,6 @@ namespace Fusion {
     // Camera find is expensive, so do it once per update for ALL implementations
     static float _lastCameraFindTime;
     static Camera _currentCam;
-
-    FusionStats _fusionStats;
-
-    private void Awake() {
-      _fusionStats = GetComponent<FusionStats>();
-    }
 
     private void OnEnable() {
       UpdateLookAt();
@@ -63,28 +57,11 @@ namespace Fusion {
 
     public void UpdateLookAt() {
 
-      // Save the CPU here if our FusionStats is in overlay. Billboarding does nothing.
-      if (_fusionStats && _fusionStats.CanvasType == FusionStats.StatCanvasTypes.Overlay) {
-        return;
-      }
-
       var cam = Camera ? Camera : MainCamera;
 
       if (cam) {
         if (enabled) {
-
-          //var armOffset = transform.position - cam.transform.position;
-          //if (_canvasT == null) {
-          //  _canvasT = GetComponentInChildren<Canvas>()?.transform;
-          //  if (_canvasT) {
-          //    _canvasT.localPosition = Offset;
-          //  }
-          //} else {
-          //  _canvasT.localPosition = Offset;
-          //}
-
           transform.rotation = cam.transform.rotation;
-          //transform.LookAt(transform.position + armOffset, cam.transform.up);
         }
       }
     }

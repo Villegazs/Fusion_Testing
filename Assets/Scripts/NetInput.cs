@@ -6,6 +6,7 @@ using UnityEngine;
 public enum InputButton
 {
     Jump,
+    UseAbility,
     Grapple,
     Glide,
 }
@@ -15,4 +16,5 @@ public struct NetInput : INetworkInput  // Will allow us to feed this struct to 
     public NetworkButtons Buttons; //Store our button presses
     public Vector2 Direction; //Movement Direction
     public Vector2 LookDelta;
+    public AbilityMode AbilityMode;
 }

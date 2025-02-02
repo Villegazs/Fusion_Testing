@@ -82,6 +82,7 @@ public class GameLogic : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         {
             GetNextSpawnPoint(spacingAngle, out Vector3 position, out Quaternion rotation);
             player.Value.Teleport(position, rotation);
+            player.Value.IsCaged = false;
             player.Value.ResetCooldowns();
         }
     }

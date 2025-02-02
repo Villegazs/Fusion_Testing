@@ -1,18 +1,35 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class Block : NetworkBehaviour   
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private MeshRenderer visual;
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip reappearSound;
+
+    public int ReappearTick;
+    private BlockManager blockManager;
+
+    private void Start()
     {
-        
+        blockManager = GetComponentInParent<BlockManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Disable()
     {
-        
+        blockManager.AddDisabled(this);
+    }
+
+    public void Hide(bool value)
+    {
+        boxCollider.enabled = !value;
+        visual.enabled = !value;
+        if (value)
+            source.Play();
+        else
+            source.PlayOneShot(reappearSound);
     }
 }

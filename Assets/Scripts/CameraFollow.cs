@@ -23,6 +23,9 @@ public class CameraFollow : MonoBehaviour
     }
 
     public static CameraFollow _singleton;
+    [SerializeField] private Highlighter highlighter;
+
+    private Player player;
 
     private Transform target;
 
@@ -41,12 +44,16 @@ public class CameraFollow : MonoBehaviour
     private void LateUpdate()
     {
         if (target != null)
+        {
             transform.SetPositionAndRotation(target.position, target.rotation);
+            highlighter.UpdateHighlightable(transform.position, transform.forward, player);
+        }
     }
 
-    public void SetTarget(Transform newTarget)
+    public void SetTarget(Transform newTarget, Player player)
     {
         target = newTarget;
+        this.player = player;
     }
 
 }

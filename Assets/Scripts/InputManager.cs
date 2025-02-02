@@ -18,6 +18,7 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
     private NetInput accumulatedInput;
     private Vector2Accumulator mouseDeltaAccumulator = new() { SmoothingWindow = 0.025f };
     private bool resetInput;
+    private AbilityMode selectedAbility;
     public void BeforeUpdate()
     {
         if(resetInput)
@@ -53,6 +54,7 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
             Vector2 lookRotationDelta = new(-mouseDelta.y, mouseDelta.x);
             //accumulatedInput.LookDelta += lookRotationDelta;
             mouseDeltaAccumulator.Accumulate(lookRotationDelta);
+            buttons.Set(InputButton.UseAbility, mouse.leftButton.isPressed);
             buttons.Set(InputButton.Grapple, mouse.rightButton.isPressed);
         }
 
@@ -77,7 +79,24 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
             buttons.Set(InputButton.Jump, keyboard.spaceKey.isPressed);
             buttons.Set(InputButton.Glide, keyboard.leftShiftKey.isPressed);
 
+            if (keyboard.digit1Key.isPressed)
+            {
+                selectedAbility = AbilityMode.BreakBlock;
+                UIManager.Singleton.SelectAbility(AbilityMode.BreakBlock);
+            }            
+            if (keyboard.digit2Key.isPressed)
+            {
+                selectedAbility = AbilityMode.Cage;
+                UIManager.Singleton.SelectAbility(AbilityMode.Cage);
+            }            
+            if (keyboard.digit3Key.isPressed)
+            {
+                selectedAbility = AbilityMode.Shove;
+                UIManager.Singleton.SelectAbility(AbilityMode.Shove);
+            }
+
             accumulatedInput.Buttons = new NetworkButtons(accumulatedInput.Buttons.Bits | buttons.Bits); //Combine the 2 networkButtons bits
+            accumulatedInput.AbilityMode = selectedAbility;
         }
 
     }
